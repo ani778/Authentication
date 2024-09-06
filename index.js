@@ -96,5 +96,4 @@ app.get('/logout',(req,res,next) => {
     });
 })
 
-app.listen(process.env.PORT, function () {
-    console.log("Express App running at http://127.0.0.1:3000/")})
+app.listen(process.env.PORT)
