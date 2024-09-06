@@ -39,14 +39,12 @@ passport.deserializeUser((id,done) => {
 })
 
 function checkNotAuthentication (req,res,next) {
-    console.log('NOT-->',req.isAuthenticated())
     if (req.isAuthenticated() === true) {
         return res.redirect("/")
     }
     next()
 }
 app.get('/register', checkNotAuthentication, (req,res) => {
-    console.log('register1')
     res.sendFile(path.resolve("views/register.html"));
 });
 
@@ -60,12 +58,10 @@ app.post('/register', async (req,res)=> {
         email,
         password: hashedPwd
     })
-    console.log('register2',req.isAuthenticated())
     res.redirect('/login')
 });
 
 app.get('/login', checkNotAuthentication, (req,res) => {
-    console.log('login')
     res.sendFile(path.resolve("views/login.html"));
 });
 
@@ -75,7 +71,6 @@ app.post('/login', passport.authenticate('local', {
 }));
 
 function checkAuthentication (req,res,next) {
-    console.log('-->',req.isAuthenticated())
     if (req.isAuthenticated() === false) {
         return res.redirect("/login")
     }
